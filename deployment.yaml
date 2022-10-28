@@ -24,6 +24,17 @@ spec:
         - name: config
           mountPath: "/etc/nginx"
           readOnly: true
+        env:
+        - name: NGINX_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: htpasswd
+              key: username
+        - name: NGINX_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: htpasswd
+              key: password
       volumes:
       - name: config
         configMap:
